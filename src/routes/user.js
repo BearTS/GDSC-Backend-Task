@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const CryptoJS = require('crypto-js');
 const User = require('../models/User');
-const { verifyandAuthorize, verifyandAdmin } = require('../middleware/verify');
+const { verifyandAuthorize, verifyAdmin } = require('../middleware/verify');
 
 const secretkey = process.env.SECRET_PASSWORD || 'secret';
 
@@ -18,7 +18,7 @@ router.put('/:id', verifyandAuthorize, async (req, res) => {
     }
 });
 
-router.delete('/find/:id', verifyandAdmin, async(req, res) => {
+router.delete('/find/:id', verifyAdmin, async(req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(200).send('User deleted');

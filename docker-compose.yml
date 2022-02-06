@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://localhost:27017/myapp
+      - PUBLIC_VAPID_KEY=xyz
+      - PRIVATE_VAPID_KEY=abc
+      - SubscriptionURL=https://push.example.com/subscribe
+      - Public_Encryption_Key=cde
+      - Auth_Key=fgh
+      
+    ports:
+      - "${PORT}:${PORT}"
+    

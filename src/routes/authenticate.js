@@ -16,9 +16,9 @@ router.post('/login', async (req, res) => {
         if (pass !== req.body.password) return res.status(400).send({ error: 'Password is incorrect!' });
         
         const token = jwt.sign({ _id: user._id, isSeller: user.isSeller }, secretkey, { expiresIn: '7d' });
-        const { password, ...other } = user._doc;
+        const { password, ...data } = user._doc;
 
-        res.status(200).send({ ...other, user: token });
+        res.status(200).send({ ...data, user: token });
     } catch (err) {
         res.status(400).send({ error: err.message });
     }
