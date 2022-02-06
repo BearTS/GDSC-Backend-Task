@@ -12,10 +12,26 @@ router.post('/', verifyandSeller, async (req, res) => {
     }
 });
 
-router.get('/', verifyandSeller, async(req, res) => {
+router.get('/', async(req, res) => {
     try {
-        const items = await Items.find();
-        res.status(200).send(items.slice(0, 10));
+        // pagination here
+        const page = parseInt(req.query.page) || 0; 
+        const limit = parseInt(req.query.limit) || 10;
+        await Items.find() .sort({ update_at: -1 })
+            .skip(page * limit) 
+            .limit(limit)
+            .exec((err, doc) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    return res.json({
+                        page: page,
+                        pageSize: doc.length,
+                        items: doc
+                    });
+                }
+            });
+
     } catch (error) {
         res.status(500).send(error);
     }

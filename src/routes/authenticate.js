@@ -29,6 +29,7 @@ router.post('/register', async (req, res) => {
     const newUser = new User({
         email: req.body.email,
         password: CryptoJS.AES.encrypt(req.body.password, secretkey).toString(),
+        isSeller: req.body.isSeller || false
     });
     try {
         const savedUser = await newUser.save();
