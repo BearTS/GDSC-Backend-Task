@@ -5,6 +5,7 @@ Quick and Simple Backend API for Ecommerce made in NodeJS
 - Beginner friendly
 - Easy to Use
 
+Pass in token as header with the key x-access-token and re-test
 
 ## To DO
 - [ ] Documentation

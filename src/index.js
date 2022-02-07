@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-
+const Port = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGO_URL).then(() => console.log('DB Connection Successfull!')).catch((err) => {console.log(err); });
 
 app.use(express.json());
@@ -18,6 +18,6 @@ app.get('*', (req, res) => {
     res.status(404).sendFile('../public/404.html');
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Listening on Port' + process.env.PORT || 3000);
+app.listen(Port, () => {
+    console.log('Listening on Port' + Port);
 });
